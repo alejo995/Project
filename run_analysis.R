@@ -77,7 +77,10 @@ for (i in 1:nrow(clean[,2])) {
 clean$activity <- x
 
 #creating summary data table 
-summary <- summarize_each(group_by(clean, subject, activity), mean)
+summary1 <- summarize_each(group_by(clean, subject, activity), mean)
+
+write.table(clean, "clean.txt", row.names = FALSE)
+write.table(summary1, "summary.txt", row.names = FALSE)
 
 #removing unnecessary variables
 rm(test_activities)
