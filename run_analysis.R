@@ -16,7 +16,7 @@ train_var <- as_tibble(read.table("./train/X_train.txt"))
 train_subject <- as_tibble(read.table("./train/subject_train.txt"))
 
 #importing names for variables and subseting in a vector
-var_names <- as_tibble(read.table("./UCI HAR Dataset/features.txt"))
+var_names <- as_tibble(read.table("./features.txt"))
 var_names <- select(var_names, V2)
 var_names <- t(var_names)
 
@@ -44,14 +44,14 @@ test <- bind_cols(test_subject, test_activities, test_var)
 train <- bind_cols(train_subject, train_activities, train_var)
 
 #bind test and train data
-data <- bind_rows(test, train)
+clean <- bind_rows(test, train)
 
 #creating variable x
 x <- 0
 
 #replacing activity data with descriptive names
-for (i in 1:nrow(data[,2])) {
-        y <- unlist(data[i,2])
+for (i in 1:nrow(clean[,2])) {
+        y <- unlist(clean[i,2])
         if (y == 1) {
                 x[i] <- "WALKING"   
         }
@@ -74,10 +74,10 @@ for (i in 1:nrow(data[,2])) {
 }
 
 #replacing the activity column
-data$activity <- x
+clean$activity <- x
 
 #creating summary data table 
-new <- summarize_each(group_by(data, subject, activity), mean)
+summary <- summarize_each(group_by(clean, subject, activity), mean)
 
 #removing unnecessary variables
 rm(test_activities)
