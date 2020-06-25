@@ -38,3 +38,5 @@ The steps are detailed in the script but here there is a summary of it
 - #removing unnecessary variables
 
 In the script all requeriments are acomplished and it gives us two tidy data sets with descriptive names
+
+## Files should be loaded to Rstudio with the command load(file = ".txt")
